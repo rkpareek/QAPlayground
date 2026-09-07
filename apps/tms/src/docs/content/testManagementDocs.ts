@@ -1,0 +1,216 @@
+import { DocArticle } from '../types';
+
+export const testManagementArticles: DocArticle[] = [
+  {
+    slug: 'test-management/test-cases',
+    title: 'Test Cases & Lifecycle',
+    description: 'Master the test case entity model, lifecycle states, duplicate, archive, versioning, and bulk operations.',
+    category: 'test-management',
+    categoryTitle: 'Test Management',
+    order: 1,
+    keywords: ['test cases', 'repository', 'lifecycle', 'archive', 'duplicate', 'bulk actions', 'versioning'],
+    lastUpdated: '2026-08-31',
+    overview: 'Test cases are the primary testing specification unit in the TMS. Each test case belongs to a Suite and optional Folder, and maintains an immutable Test ID (`@T########`).',
+    whenToUse: 'Use test cases to define manual procedures, automated test specifications, or acceptance criteria for user stories.',
+    howItWorks: 'Test cases support draft, ready, and obsolete lifecycles, and can be executed multiple times across various Test Runs without altering the underlying specification.',
+    sections: [
+      {
+        id: 'test-case-properties',
+        title: 'Core Test Case Properties',
+        table: {
+          headers: ['Property', 'Type', 'Description'],
+          rows: [
+            ['id / testId', 'string (@T########)', 'Unique test identifier preserved across code AST synchronization and XML ingestion.'],
+            ['title', 'string', 'Concise summary of the test scenario.'],
+            ['suiteId', 'string (@S########)', 'Parent test suite container.'],
+            ['folderId', 'string (optional)', 'Sub-folder within the suite.'],
+            ['priority', 'critical | high | medium | low', 'Execution urgency level.'],
+            ['severity', 'blocker | critical | major | minor | trivial', 'Impact on system stability if broken.'],
+            ['type', 'functional | regression | smoke | security | performance', 'Classification of test domain.'],
+            ['automationStatus', 'manual | automated | planned | not_automatable', 'Automation pipeline readiness.'],
+            ['estimatedDurationMinutes', 'number', 'Expected execution duration for velocity planning.'],
+          ],
+        },
+      },
+      {
+        id: 'lifecycle-actions',
+        title: 'Actions & Lifecycle Operations',
+        content: 'From the Test Repository table or drawer:\n- **Duplicate**: Clones the case with a new `@T` ID and title prefix "Copy of...".\n- **Archive / Restore**: Safely archives obsolete cases without breaking historical run records.\n- **Bulk Operations**: Select multiple checkboxes to batch-update Priority, Automation Status, Suite, or batch-delete.',
+      },
+    ],
+    relatedSlugs: [
+      'test-management/quick-add',
+      'test-management/test-editor',
+      'test-management/test-suites',
+      'automation/test-ids',
+    ],
+  },
+  {
+    slug: 'test-management/quick-add',
+    title: 'Quick Add Test Case (Hotkey "C")',
+    description: 'Rapidly author test cases during sprint grooming and backlog reviews without modal friction.',
+    category: 'test-management',
+    categoryTitle: 'Test Management',
+    order: 2,
+    keywords: ['quick add', 'rapid creation', 'hotkey', 'c key', 'inline', 'batch add'],
+    lastUpdated: '2026-08-31',
+    overview: 'The Quick Add dialog allows testers and developers to create test cases in under 3 seconds using the keyboard.',
+    sections: [
+      {
+        id: 'how-to-use-quick-add',
+        title: 'How to Use Quick Add',
+        content: '1. Press `C` anywhere in the app (or click "+ Quick Add" in the top bar).\n2. Type the Title.\n3. Select Priority (Low, Medium, High, Critical).\n4. Select Target Suite.\n5. Optionally add tags (e.g. `auth, smoke`).\n6. Press `Ctrl + Enter` (or check "Create another" and hit Submit) to keep drafting.',
+        callout: {
+          type: 'tip',
+          title: 'Grooming Sessions',
+          content: 'You can create 30 test case skeletons in a 10-minute meeting, and assign team members to flesh out step details later.',
+        },
+      },
+      {
+        id: 'quick-vs-full',
+        title: 'Quick Add vs. Full Editor Comparison',
+        table: {
+          headers: ['Feature', 'Quick Add Modal', 'Full Editor Modal'],
+          rows: [
+            ['Speed', '< 3 seconds', '1-3 minutes'],
+            ['Step-by-Step Instructions', 'Initial template step', 'Unlimited granular steps'],
+            ['Custom Fields', 'Uses defaults', 'Full dynamic custom field inputs'],
+            ['Data Parameters', 'None', 'Variable datasets ({param})'],
+            ['Requirements Linking', 'Manual post-creation', 'Interactive selector'],
+          ],
+        },
+      },
+    ],
+    relatedSlugs: [
+      'test-management/test-cases',
+      'test-management/test-editor',
+    ],
+  },
+  {
+    slug: 'test-management/test-editor',
+    title: 'Full Test Case Editor Reference',
+    description: 'Detailed breakdown of all tabs, fields, steps, data tables, and requirement attachments in the Full Editor.',
+    category: 'test-management',
+    categoryTitle: 'Test Management',
+    order: 3,
+    keywords: ['editor', 'steps', 'preconditions', 'expected result', 'parameters', 'attachments', 'requirements'],
+    lastUpdated: '2026-08-31',
+    overview: 'The Full Test Case Editor is a tabbed workspace for writing detailed, reproducible test procedures.',
+    sections: [
+      {
+        id: 'editor-tabs',
+        title: 'Editor Tabs Breakdown',
+        content: '- **Steps Tab**: Action, Test Data input, and Expected Result. Supports re-ordering, inserting steps above/below, and deleting steps.\n- **General Metadata Tab**: Preconditions, Postconditions, Description, Priority, Severity, Type, Owner, Estimated Time, and Tags.\n- **Custom Fields Tab**: Live form fields generated dynamically from the Organization and Project Custom Fields registry.\n- **Parameters Tab**: Key-value test variables for data-driven testing (e.g. `currency: USD, EUR, GBP`).\n- **Linked Items Tab**: User Stories/Requirements and related Defect IDs.',
+      },
+    ],
+    relatedSlugs: [
+      'test-management/test-cases',
+      'test-management/custom-fields',
+      'requirements-defects/requirements',
+    ],
+  },
+  {
+    slug: 'test-management/test-suites',
+    title: 'Test Suites & Hierarchies',
+    description: 'Organize tests into logical modules, understand Suite IDs (@S########), and manage suite trees.',
+    category: 'test-management',
+    categoryTitle: 'Test Management',
+    order: 4,
+    keywords: ['test suites', 'suite id', '@S', 'hierarchy', 'tree', 'organization'],
+    lastUpdated: '2026-08-31',
+    overview: 'Test Suites group related test cases and folders under a cohesive domain (e.g., "Authentication", "Checkout & Cart", "Billing API").',
+    sections: [
+      {
+        id: 'suite-id-format',
+        title: 'Suite ID Format (@S########)',
+        content: 'Every Test Suite is assigned an immutable 8-digit identifier prefixed by `@S` (e.g., `@S83920194`). When automation files use Mocha `describe("Authentication @S83920194", ...)` or Playwright `test.describe("...", ...)`, the TMS automatically syncs the suite structure.',
+      },
+    ],
+    relatedSlugs: [
+      'test-management/test-cases',
+      'automation/suite-ids',
+    ],
+  },
+  {
+    slug: 'test-management/test-folders',
+    title: 'Test Folders & Organization',
+    description: 'Creating nested subdirectories within suites to partition complex feature surfaces.',
+    category: 'test-management',
+    categoryTitle: 'Test Management',
+    order: 5,
+    keywords: ['folders', 'subdirectories', 'organization', 'grouping', 'nesting'],
+    lastUpdated: '2026-08-31',
+    overview: 'Folders provide an additional level of categorization within Test Suites without creating separate suites.',
+    sections: [
+      {
+        id: 'folder-management',
+        title: 'Managing Folders',
+        content: 'Inside any Test Suite, click **+ New Folder** in the repository tree to create directories like "Negative Tests", "Edge Cases", "RBAC Checks", or "Mobile Responsive".',
+      },
+    ],
+    relatedSlugs: [
+      'test-management/test-suites',
+      'test-management/test-cases',
+    ],
+  },
+  {
+    slug: 'test-management/custom-fields',
+    title: 'Dynamic Custom Fields Engine',
+    description: 'Define custom fields (Text, Number, URL, Date, Boolean, Dropdown, Multi-Select) with project scoping and validation rules.',
+    category: 'test-management',
+    categoryTitle: 'Test Management',
+    order: 6,
+    keywords: ['custom fields', 'fields engine', 'dropdown', 'multiselect', 'scoping', 'jira epic'],
+    lastUpdated: '2026-08-31',
+    overview: 'The Dynamic Custom Fields engine enables organizations to extend test case metadata to match existing company standards, Jira fields, or compliance mandates.',
+    sections: [
+      {
+        id: 'field-types',
+        title: 'Supported Custom Field Types',
+        table: {
+          headers: ['Field Type', 'Widget', 'Example Use Case'],
+          rows: [
+            ['Text', 'Input box', 'Jira Issue Key / External ID (e.g. PROJ-1029)'],
+            ['Number', 'Numeric input', 'Compliance Risk Score (1-10)'],
+            ['URL', 'Link input with preview', 'Figma Design Spec URL, Confluence PRD'],
+            ['Date', 'Date picker', 'Target Deprecation Date'],
+            ['Boolean', 'Toggle checkbox', 'Requires Hardware Token, GDPR Sensitive'],
+            ['Dropdown', 'Single-select dropdown', 'Release Tier (Tier 1, Tier 2, Tier 3)'],
+            ['Multi-Select', 'Badge selector', 'Target Platforms (iOS, Android, Web, Desktop)'],
+          ],
+        },
+      },
+      {
+        id: 'field-scoping',
+        title: 'Global vs. Project Scoping',
+        content: 'Custom Fields can be applied organization-wide (`*`) or restricted to specific projects (e.g., only the "Payment Gateway" project).',
+      },
+    ],
+    relatedSlugs: [
+      'test-management/test-editor',
+      'administration/custom-fields',
+    ],
+  },
+  {
+    slug: 'test-management/tags-labels',
+    title: 'Tags & Label Registry',
+    description: 'Centralized label registry with color coding, category groupings, and real-time usage telemetry.',
+    category: 'test-management',
+    categoryTitle: 'Test Management',
+    order: 7,
+    keywords: ['labels', 'tags', 'label registry', 'colors', 'categories', 'telemetry'],
+    lastUpdated: '2026-08-31',
+    overview: 'The Label Registry centralizes all test tags with custom hex colors, descriptive tooltips, and categories (e.g., Sanity, Security, Regression, Flaky).',
+    sections: [
+      {
+        id: 'label-picker',
+        title: 'Interactive Quick-Add Label Selector',
+        content: 'When editing test cases, the editor displays all organization labels with their designated color badges for 1-click toggling, avoiding typo duplicates.',
+      },
+    ],
+    relatedSlugs: [
+      'test-management/test-editor',
+      'administration/label-registry',
+    ],
+  },
+];

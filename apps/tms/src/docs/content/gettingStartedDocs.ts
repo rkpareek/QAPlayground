@@ -1,0 +1,188 @@
+import { DocArticle } from '../types';
+
+export const gettingStartedArticles: DocArticle[] = [
+  {
+    slug: 'getting-started/introduction',
+    title: 'Introduction & Core Concepts',
+    description: 'A comprehensive introduction to the Enterprise Test Management System (TMS), key entities, and core terminology.',
+    category: 'getting-started',
+    categoryTitle: 'Getting Started',
+    order: 1,
+    keywords: ['introduction', 'overview', 'core concepts', 'tms', 'architecture', 'entities', 'basics'],
+    lastUpdated: '2026-08-31',
+    overview: 'The Test Management System (TMS) is an enterprise-grade platform designed to centralize manual test authoring, automated AST test synchronization, CI/CD result ingestion, and release quality analytics.',
+    whenToUse: 'Use this guide when onboarding new QA engineers, SDETs, engineering managers, or workspace administrators to understand how testing assets are structured.',
+    howItWorks: 'The platform organizes test assets into a hierarchical structure starting from Projects down to individual Step Verdicts, maintaining bidirectional traceability with requirements and defects.',
+    sections: [
+      {
+        id: 'what-is-this-tms',
+        title: 'What is this TMS?',
+        content: 'This platform brings together manual test planning, automated code-level test identification, and continuous pipeline execution into a single, cohesive source of truth. Unlike fragmented tools, it merges manual test cases with real-world Playwright/Mocha source code using unique AST identifiers.',
+        callout: {
+          type: 'tip',
+          title: 'Single Source of Truth',
+          content: 'Manual QA cases and automated tests live side-by-side in the same Test Repository, preventing duplicate test definitions across squads.',
+        },
+      },
+      {
+        id: 'core-hierarchy',
+        title: 'Core Entity Hierarchy',
+        content: 'Understanding the entity hierarchy is essential before creating testing assets:',
+        table: {
+          headers: ['Entity', 'Identifier Format', 'Description'],
+          rows: [
+            ['Project', 'KEY (e.g. ECOM, FIN)', 'The root boundary for suites, plans, runs, defects, and repository files.'],
+            ['Test Suite', '@S######## (e.g. @S10293847)', 'High-level logical group of test cases and folders.'],
+            ['Test Folder', 'UUID / Name', 'Hierarchical directories within suites to organize test cases by feature or domain.'],
+            ['Test Case', '@T######## (e.g. @T84920193)', 'Individual test definition with preconditions, steps, expected results, and metadata.'],
+            ['Test Plan', 'PLAN-###', 'Milestone-oriented release blueprint outlining scope, environments, and entry/exit criteria.'],
+            ['Test Run', 'RUN-###', 'Execution instance where testers or CI jobs submit step verdicts.'],
+          ],
+        },
+      },
+      {
+        id: 'dual-editor-paradigm',
+        title: 'Dual-Editor Paradigm',
+        content: 'To maximize efficiency for both speed and depth, the platform provides two distinct test authoring modes:\n\n1. **Quick Add Mode (Shortcut "C")**: Instant inline creation modal for rapidly logging 10-20 test titles, priority, and parent suite during grooming sessions.\n2. **Full Multi-Tab Editor**: Comprehensive editor with granular test steps, dynamic custom fields, parameterized datasets, requirements linking, and revision notes.',
+      },
+    ],
+    relatedSlugs: [
+      'getting-started/first-project',
+      'getting-started/first-test-case',
+      'test-management/test-cases',
+      'automation/overview',
+    ],
+  },
+  {
+    slug: 'getting-started/first-project',
+    title: 'Creating Your First Project',
+    description: 'Learn how to create a project, configure default environments, select project leads, and invite team members.',
+    category: 'getting-started',
+    categoryTitle: 'Getting Started',
+    order: 2,
+    keywords: ['project', 'setup', 'workspace', 'environments', 'configurations', 'new project'],
+    lastUpdated: '2026-08-31',
+    overview: 'Projects serve as the container for all test repository suites, automation source files, test plans, active execution runs, and defect reports.',
+    whenToUse: 'Create a new project whenever you launch a distinct microservice, customer-facing application, mobile client, or core infrastructure module.',
+    howItWorks: 'Workspace Administrators or Organization Owners can initiate project creation from the Project Switcher or Administration settings.',
+    sections: [
+      {
+        id: 'project-creation-steps',
+        title: 'Step-by-Step Project Creation',
+        content: 'Follow these steps to initialize your project:',
+        codeSnippet: {
+          language: 'bash',
+          code: '# Navigation Path:\nClick the Project Selector in the Top Header -> Select "+ New Project"\n\nRequired Fields:\n- Project Name: e.g. "Global Payment Gateway"\n- Project Key: 2-5 uppercase letters (e.g. "PAY")\n- Default Lead: Select team member\n- Description: Summary of functional scope',
+          caption: 'Project initialization parameters',
+        },
+      },
+      {
+        id: 'project-environments',
+        title: 'Configuring Environments and Configurations',
+        content: 'Every project can have scoped environments (e.g. Development, Staging, UAT, Production) and execution configurations (e.g. Chrome 120, Firefox, Safari iOS, Mobile Viewport). These are automatically available when setting up Test Plans and Runs.',
+      },
+    ],
+    relatedSlugs: [
+      'getting-started/introduction',
+      'getting-started/first-test-case',
+      'administration/projects',
+    ],
+  },
+  {
+    slug: 'getting-started/first-test-case',
+    title: 'Authoring Your First Test Case',
+    description: 'Master test case creation using both Quick Add and the Full Step Editor.',
+    category: 'getting-started',
+    categoryTitle: 'Getting Started',
+    order: 3,
+    keywords: ['test case', 'quick add', 'editor', 'steps', 'preconditions', 'tags', 'custom fields'],
+    lastUpdated: '2026-08-31',
+    overview: 'Test cases represent individual test specifications. In this TMS, each test case receives an immutable `@T########` tag used for automation synchronization.',
+    sections: [
+      {
+        id: 'quick-add-workflow',
+        title: 'Quick Add Workflow (Press "C")',
+        content: 'Press keyboard shortcut `C` from any view or click "+ Quick Add" in the top bar. Fill in the Title, Priority, Suite, and press `Ctrl+Enter` or check "Create another" to batch-create multiple cases within seconds.',
+        callout: {
+          type: 'tip',
+          title: 'Speed Pro-Tip',
+          content: 'You can draft 50 test cases during sprint planning using Quick Add, then flesh out detailed steps later using the full editor.',
+        },
+      },
+      {
+        id: 'detailed-editor-workflow',
+        title: 'Detailed Multi-Tab Editor',
+        content: 'Opening the full editor gives you access to:\n- **Steps Sub-Tab**: Step number, action instructions, test input data, and expected result.\n- **Custom Fields Sub-Tab**: Dynamic fields (e.g., Jira Epic, Compliance Level, Release Tier).\n- **Parameters Sub-Tab**: Data-driven variables like `{username}`, `{currency}`.\n- **Links Sub-Tab**: Bidirectional links to User Stories / Requirements and known Defects.',
+      },
+    ],
+    relatedSlugs: [
+      'test-management/test-cases',
+      'test-management/quick-add',
+      'test-management/test-editor',
+      'automation/test-ids',
+    ],
+  },
+  {
+    slug: 'getting-started/first-test-run',
+    title: 'Executing Your First Test Run',
+    description: 'Create a test run, assign tests to testers, record step-by-step verdicts, and log defects upon failure.',
+    category: 'getting-started',
+    categoryTitle: 'Getting Started',
+    order: 4,
+    keywords: ['test run', 'execution', 'verdict', 'pass', 'fail', 'retest', 'timer'],
+    lastUpdated: '2026-08-31',
+    overview: 'A Test Run is an active execution cycle where manual testers or automated CI pipelines record verdicts against a selected cohort of test cases.',
+    sections: [
+      {
+        id: 'run-creation',
+        title: 'Creating a Test Run',
+        content: 'Navigate to **Test Runs** -> click **+ New Test Run**. Select the target environment (e.g., Staging), configuration (e.g., Chrome Desktop), milestone/plan, and pick the test cases (select all, by suite, or custom selection).',
+      },
+      {
+        id: 'execution-cockpit',
+        title: 'The Execution Cockpit',
+        content: 'The Execution Drawer provides an interactive testing view:\n- **Run Timer**: Automatically counts active testing duration.\n- **Verdict Buttons**: Passed (Green), Failed (Red), Blocked (Yellow), Skipped (Slate), Retest (Purple).\n- **Step-by-Step Verdicts**: Pass or fail individual steps with specific evidence notes.\n- **Instant Defect Creation**: Failed tests provide a 1-click button to create and link a Defect with pre-populated error context.',
+      },
+    ],
+    relatedSlugs: [
+      'test-execution/test-runs',
+      'test-execution/execution-cockpit',
+      'test-execution/run-identifiers',
+      'requirements-defects/defects',
+    ],
+  },
+  {
+    slug: 'getting-started/workspace',
+    title: 'Understanding the Workspace & Hotkeys',
+    description: 'Master keyboard shortcuts, notifications, dark/light theme switching, and global search.',
+    category: 'getting-started',
+    categoryTitle: 'Getting Started',
+    order: 5,
+    keywords: ['shortcuts', 'hotkeys', 'navigation', 'search', 'theme', 'notifications'],
+    lastUpdated: '2026-08-31',
+    overview: 'The platform is optimized for keyboard-first navigation and dense information density.',
+    sections: [
+      {
+        id: 'keyboard-shortcuts',
+        title: 'Keyboard Shortcuts Reference',
+        table: {
+          headers: ['Key / Combo', 'Action', 'Scope'],
+          rows: [
+            ['Ctrl + K / Cmd + K', 'Open Global Search & Command Palette', 'Global'],
+            ['C', 'Open Quick Add Test Case Modal', 'Global'],
+            ['G then R', 'Navigate to Test Repository', 'Global'],
+            ['G then E', 'Navigate to Test Runs', 'Global'],
+            ['G then P', 'Navigate to Test Plans', 'Global'],
+            ['G then A', 'Navigate to Automation Hub', 'Global'],
+            ['G then D', 'Navigate to Documentation', 'Global'],
+            ['Esc', 'Close active modal, drawer, or dialog', 'Global'],
+          ],
+        },
+      },
+    ],
+    relatedSlugs: [
+      'overview/navigation',
+      'overview/global-search',
+    ],
+  },
+];
