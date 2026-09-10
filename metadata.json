@@ -1,6 +1,6 @@
 {
   "name": "QA Tools Hub",
-  "description": "A unified, modular QA engineering portal and testing ecosystem aggregating Test Management, Study Hub, Practice E-commerce Sandbox, API Studio, and Automation Generators.",
+  "description": "A unified QA engineering and developer portal aggregating Test Management, Agentic Python Learning Coach, Study Hub, Practice Sandbox, API Studio, and Automation Generators.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

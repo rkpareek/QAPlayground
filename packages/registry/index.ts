@@ -170,6 +170,26 @@ export const TOOLS_REGISTRY: ToolMetadata[] = [
       'Export to JSON, CSV, and SQL INSERT formats',
       'Custom Field Schema Designer'
     ]
+  },
+  {
+    id: 'learn-python',
+    name: 'Agentic Python Learning Coach',
+    description: 'Adaptive 5-mode Python learning coach with mental reasoning (Quick Think), sandboxed test execution (Code Lab), Socratic interactive tutor (Learn & Understand), real-world WAPs (Practical Lab), and English algorithmic reasoning (Logic Builder).',
+    category: 'Knowledge & Learning',
+    path: '/learn-python',
+    icon: 'Zap',
+    color: 'emerald',
+    tags: ['Python Coach', 'Quick Think', 'Code Lab', 'Logic Builder', 'Pyodide Sandbox', 'Adaptive AI'],
+    status: 'new',
+    version: '2.0.0',
+    features: [
+      'Five Dedicated Learning Modes (M, L, T, P, E)',
+      'Sandboxed Python Execution & Deterministic Test Assertions',
+      'Mistake Memory Tracking (Counting vs Summing, Mutation vs Return)',
+      'Algorithmic English-First Logic Reasoning Builder',
+      'Interactive Socratic Memory Models (References, Mutability, Scope)',
+      '4-Tier Progressive Hint Ladder (Conceptual to Partial Code)'
+    ]
   }
 ];
 

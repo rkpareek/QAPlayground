@@ -14,6 +14,7 @@ import { AutomationApp } from '../apps/automation/src/AutomationApp';
 import { PerformanceTestingApp } from '../apps/performance-testing/src/PerformanceTestingApp';
 import { TestDataApp } from '../apps/test-data/src/TestDataApp';
 import { ApisApp } from '../apps/apis/src/ApisApp';
+import { LearnPythonApp } from '../learn-python/src/LearnPythonApp';
 
 export const App: React.FC = () => {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
@@ -42,6 +43,7 @@ export const App: React.FC = () => {
             <Route path="/automation/*" element={<AutomationApp />} />
             <Route path="/performance-testing/*" element={<PerformanceTestingApp />} />
             <Route path="/test-data/*" element={<TestDataApp />} />
+            <Route path="/learn-python/*" element={<LearnPythonApp />} />
           </Routes>
         </main>
       </div>

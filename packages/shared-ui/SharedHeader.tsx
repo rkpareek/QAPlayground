@@ -14,6 +14,7 @@ import {
   Gauge, 
   Database,
   Terminal,
+  Zap,
   ExternalLink,
   ChevronDown,
   Menu,
@@ -44,6 +45,7 @@ export const SharedHeader: React.FC<SharedHeaderProps> = ({ onOpenCommandPalette
       case 'Gauge': return <Gauge className={className} />;
       case 'Database': return <Database className={className} />;
       case 'Terminal': return <Terminal className={className} />;
+      case 'Zap': return <Zap className={className} />;
       default: return <LayoutGrid className={className} />;
     }
   };
